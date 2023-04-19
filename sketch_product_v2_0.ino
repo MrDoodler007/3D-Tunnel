@@ -126,20 +126,20 @@ bool check(int* ac, int* tg, int epsilon){
 // Функция поворота базиса в радианах by Максим
 static void vec_rotate(float* vector, float* angles)
 {
-	float vector_new[3]{ 0, 0, 0 };
-	// x координата:
-	vector_new[0] = (vector[0] * cos(angles[1]) * cos(angles[2])) + (vector[1] * sin(angles[2]) * cos(angles[1])) + (vector[2] * -sin(angles[1]));
-	// y координата:
-	vector_new[1] = (vector[0] * (sin(angles[0]) * sin(angles[1]) * cos(angles[2]) - sin(angles[2]) * cos(angles[0]))) + 
-		(vector[1] * (sin(angles[0]) * sin(angles[1]) * sin(angles[2]) + cos(angles[2]) * cos(angles[0]))) + (vector[2] * (sin(angles[0]) * cos(angles[1])));
-	// z координата:
-	vector_new[2] = (vector[0] * (sin(angles[0]) * sin(angles[2]) + sin(angles[1]) * cos(angles[0]) * cos(angles[2]))) +
-		(vector[1] * (-sin(angles[0]) * cos(angles[2]) + sin(angles[1]) * sin(angles[2]) * cos(angles[0]))) + (vector[2] * (cos(angles[0]) * cos(angles[1])));
-	// Запись в исходный указатель
-	vector[0] = round(100 * vector_new[0])/100;
-	vector[1] = round(100 * vector_new[1])/100;
-	vector[2] = round(100 * vector_new[2])/100;
-	return;
+    float vector_new[3]{ 0, 0, 0 };
+    // x координата:
+    vector_new[0] = (vector[0] * cos(angles[1]) * cos(angles[2])) + (vector[1] * sin(angles[2]) * cos(angles[1])) + (vector[2] * -sin(angles[1]));
+    // y координата:
+    vector_new[1] = (vector[0] * (sin(angles[0]) * sin(angles[1]) * cos(angles[2]) - sin(angles[2]) * cos(angles[0]))) + 
+      (vector[1] * (sin(angles[0]) * sin(angles[1]) * sin(angles[2]) + cos(angles[2]) * cos(angles[0]))) + (vector[2] * (sin(angles[0]) * cos(angles[1])));
+    // z координата:
+    vector_new[2] = (vector[0] * (sin(angles[0]) * sin(angles[2]) + sin(angles[1]) * cos(angles[0]) * cos(angles[2]))) +
+      (vector[1] * (-sin(angles[0]) * cos(angles[2]) + sin(angles[1]) * sin(angles[2]) * cos(angles[0]))) + (vector[2] * (cos(angles[0]) * cos(angles[1])));
+    // Запись в исходный указатель
+    vector[0] = round(100 * vector_new[0])/100;
+    vector[1] = round(100 * vector_new[1])/100;
+    vector[2] = round(100 * vector_new[2])/100;
+    return;
 }
 
 
