@@ -7,7 +7,7 @@
 #define LED_PIN 20
 #define LED_COUNT 2
 
-float g = 3.1; // 3.1 or 3.5
+float g = 3.1;  // 3.1 or 3.5
 int epsilon = 10;
 int rnd_num;
 float* ang;
@@ -18,7 +18,7 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, NEO_GRB + NEO_KH
 Accelerometer accelerometer;
 
 
-// Преобразование трех проекций (_data) ускорения для получения ~линейной зависимости яркости цвета от угла (data)
+// Преобразование трех проекций ускорения (_data) для получения ~линейной зависимости яркости цвета от угла
 void linear_data(float* _data, int* data){
     data[0] = round((1 - sqrt((1 - abs(_data[0]) / g))) * 255);
     data[1] = round((1 - sqrt((1 - abs(_data[1]) / g))) * 255);
@@ -62,7 +62,7 @@ int* gain_linear_ac(){
 
 
 // Генерация достижимого целевого цвета
-int* gen_random_target(int rnd_num){
+int* random_target(int rnd_num){
     float _tg[3];
     _tg[0] = (rnd_num % (int)(g*10) + 1) / 10.0;
 
@@ -83,6 +83,7 @@ int* gen_random_target(int rnd_num){
 }
 
 
+// Случайная перестановка трех элементов
 void random_replace(float* _tg, int rnd_num){
     if(rnd_num % 2 == 1)
       std::swap(_tg[0], _tg[1]);
@@ -97,7 +98,8 @@ void random_replace(float* _tg, int rnd_num){
 }
 
 
-float* gen_random_angles(){
+// Случайная генерация трех углов [0, pi)
+float* random_angles(){
     static float ang[3];
     ang[0] = (rand() % 314) / 100.0;
     ang[1] = (rand() % 314) / 100.0;
@@ -148,8 +150,8 @@ void setup() {
     accelerometer.begin();
     accelerometer.setRange(AccelerometerRange::RANGE_4G);
 
-    tg = gen_random_target(rand());
-    ang = gen_random_angles();
+    tg = random_target(rand());
+    ang = random_angles();
 }
 
 void loop() {
@@ -159,8 +161,8 @@ void loop() {
     rnd_num = rand();
 
     if(check(ac, tg, epsilon)){
-      tg = gen_random_target(rnd_num);
-      ang = gen_random_angles();
+      tg = random_target(rnd_num);
+      ang = random_angles();
     }
 
     Serial.print(tg[0]);
