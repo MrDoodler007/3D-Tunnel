@@ -7,7 +7,7 @@
 #define LED_PIN 20
 #define LED_COUNT 2
 
-float g = 3.1;  // 3.1 or 3.5
+float g = 3.3;  // 3.1 or 3.5
 int epsilon = 10;
 int rnd_num;
 float* ang;
@@ -161,6 +161,10 @@ void loop() {
     rnd_num = rand();
 
     if(check(ac, tg, epsilon)){
+      strip.setPixelColor(0, strip.Color(0, 0, 0));
+      strip.setPixelColor(1, strip.Color(0, 0, 0));
+      strip.show();
+      delay(300);
       tg = random_target(rnd_num);
       ang = random_angles();
     }
